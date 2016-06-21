@@ -4,8 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
+import uk.ac.ebi.embl.InChI;
+
 public class Base {
 
+	final static Logger logger = Logger.getLogger(Base.class);
 	private static final String ZIP_FILE_NAME = "embl.txt.gz";
 	private static final String FILE_NAME = "embl.txt";
 	private static final String URL = "http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_21_chemreps.txt.gz";
@@ -40,7 +45,7 @@ public class Base {
 			}
 			buf.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 

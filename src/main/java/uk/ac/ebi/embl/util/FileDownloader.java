@@ -9,7 +9,11 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.log4j.Logger;
+
 public class FileDownloader {
+
+	final static Logger logger = Logger.getLogger(FileDownloader.class);
 
 	public void downloadFile(String url, String fileName) throws IOException {
 		ReadableByteChannel rbc;
@@ -25,31 +29,28 @@ public class FileDownloader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
+			logger.error(e.getMessage());			
+		} finally {
 			fos.close();
 		}
 	}
 
-	public void gunzipIt(String inFile,String outFile){
-	     byte[] buffer = new byte[1024];
-	     try{
-	          GZIPInputStream gzis = 
-	    		new GZIPInputStream(new FileInputStream(inFile));
-	 
-	    	 FileOutputStream out = 
-	            new FileOutputStream(outFile);
-	        int len;
-	        while ((len = gzis.read(buffer)) > 0) {
-	        	out.write(buffer, 0, len);
-	        }
-	        gzis.close();
-	    	out.close();
-	    	System.out.println("unzip Done");
-	    	
-	    }catch(IOException ex){
-	       ex.printStackTrace();   
-	    }
+	public void gunzipIt(String inFile, String outFile) {
+		byte[] buffer = new byte[1024];
+		try {
+			GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(inFile));
+
+			FileOutputStream out = new FileOutputStream(outFile);
+			int len;
+			while ((len = gzis.read(buffer)) > 0) {
+				out.write(buffer, 0, len);
+			}
+			gzis.close();
+			out.close();
+			logger.info("unzip successful");
+		} catch (IOException ex) {
+			logger.error(ex.getMessage());
+		}
 	}
 
 }

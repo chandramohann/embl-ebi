@@ -2,6 +2,8 @@ package uk.ac.ebi.embl;
 
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 import uk.ac.ebi.embl.util.Base;
 import uk.ac.ebi.embl.util.Dictionary;
 
@@ -10,6 +12,9 @@ import uk.ac.ebi.embl.util.Dictionary;
  *
  */
 public class InChI {
+
+	final static Logger logger = Logger.getLogger(InChI.class);
+
 	public static void main(String args[]) {
 		try {
 			int count = 0;
@@ -27,12 +32,12 @@ public class InChI {
 				for (String each : emblMap.keySet()) {
 					String key = each.toString();
 					String value = emblMap.get(each).toString();
-					/*naive algo*/
-//					if (value.contains(str)) {
-//						System.out.println(value + "," + str + "," + key);
-//						count++;
-//					}
-					/*KMP algo*/
+					/* naive algo */
+					// if (value.contains(str)) {
+					// System.out.println(value + "," + str + "," + key);
+					// count++;
+					// }
+					/* KMP algo */
 					if (ss.KMP(value.toCharArray(), str.toCharArray())) {
 						System.out.println(value + "," + str + "," + key);
 						count++;
@@ -43,8 +48,7 @@ public class InChI {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-
+			logger.error(e.getMessage());
 		}
 	}
 }

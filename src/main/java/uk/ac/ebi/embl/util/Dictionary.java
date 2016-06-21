@@ -8,7 +8,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import uk.ac.ebi.embl.InChI;
+
 public class Dictionary {
+
+	final static Logger logger = Logger.getLogger(Dictionary.class);
 
 	private List<String> dictionaryList;
 	private List<String> orderedList;
@@ -40,7 +46,7 @@ public class Dictionary {
 			}
 			buf.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -68,8 +74,7 @@ public class Dictionary {
 
 	public List<String> getDictionaryList() {
 		// dictionaryList.sort(Comparator.comparing(String::length).reversed());
-		Collections.sort(dictionaryList, new StringLengthComparator());
-		System.out.println(dictionaryList);
+		Collections.sort(dictionaryList, new StringLengthComparator());		
 		return dictionaryList;
 	}
 }
