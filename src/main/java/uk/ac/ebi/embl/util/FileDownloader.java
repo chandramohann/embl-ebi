@@ -25,11 +25,10 @@ public class FileDownloader {
 			fos = new FileOutputStream(fileName);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			fos.close();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			logger.error(e.getMessage());			
+		} catch (MalformedURLException me) {
+			logger.error(me.getMessage());	
+		} catch (IOException ie) {
+			logger.error(ie.getMessage());			
 		} finally {
 			fos.close();
 		}

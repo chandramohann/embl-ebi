@@ -6,8 +6,6 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import uk.ac.ebi.embl.InChI;
-
 public class Base {
 
 	final static Logger logger = Logger.getLogger(Base.class);
@@ -23,6 +21,7 @@ public class Base {
 
 	public void loadBaseMap() {
 		try {
+			logger.info("downloading the Base data");
 			FileDownloader fDownload = new FileDownloader();
 			fDownload.downloadFile(URL, ZIP_FILE_NAME);
 			fDownload.gunzipIt(ZIP_FILE_NAME, FILE_NAME);
@@ -44,6 +43,7 @@ public class Base {
 				}
 			}
 			buf.close();
+			logger.info("loaded the GMBH data successfully");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

@@ -5,12 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import uk.ac.ebi.embl.InChI;
 
 public class Dictionary {
 
@@ -25,6 +22,7 @@ public class Dictionary {
 	public void loadDictionary() {
 		dictionaryList = new ArrayList<String>();
 		try {
+			logger.info("downloading the dictionary");
 			FileDownloader fDownload = new FileDownloader();
 			fDownload.downloadFile(URL, FILE_NAME);
 			BufferedReader buf = new BufferedReader(new FileReader(FILE_NAME));
@@ -45,6 +43,7 @@ public class Dictionary {
 				}
 			}
 			buf.close();
+			logger.info("loaded the dicitionary successfully");
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
@@ -69,11 +68,11 @@ public class Dictionary {
 				}
 			}
 		}
-
 	}
 
 	public List<String> getDictionaryList() {
 		// dictionaryList.sort(Comparator.comparing(String::length).reversed());
+		System.out.println(dictionaryList);
 		Collections.sort(dictionaryList, new StringLengthComparator());		
 		return dictionaryList;
 	}
