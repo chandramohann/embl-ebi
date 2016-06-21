@@ -67,7 +67,8 @@ public class Dictionary {
 	}
 
 	public List<String> getDictionaryList() {
-		dictionaryList.sort(Comparator.comparing(String::length).reversed());
+		// dictionaryList.sort(Comparator.comparing(String::length).reversed());
+		Collections.sort(dictionaryList, new StringLengthComparator());
 		System.out.println(dictionaryList);
 		return dictionaryList;
 	}
