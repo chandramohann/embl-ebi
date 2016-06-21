@@ -19,7 +19,7 @@ public class Base {
 	public void loadBaseMap() {
 		try {
 			FileDownloader fDownload = new FileDownloader();
-			//fDownload.downloadFile(URL, ZIP_FILE_NAME);
+			fDownload.downloadFile(URL, ZIP_FILE_NAME);
 			fDownload.gunzipIt(ZIP_FILE_NAME, FILE_NAME);
 			BufferedReader buf = new BufferedReader(new FileReader(FILE_NAME));
 			emblBaseMap = new HashMap<String, String>();
